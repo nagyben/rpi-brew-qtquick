@@ -3,23 +3,45 @@ import QtQuick.Controls 2.0
 import QtQuick.Layouts 1.3
 
 ApplicationWindow {
+    id: applicationWindow
     visible: true
     width: 640
     height: 480
     title: qsTr("Hello World")
 
-    SwipeView {
-        id: swipeView
+    ColumnLayout {
+        id: column
         anchors.fill: parent
-        currentIndex: tabBar.currentIndex
 
-        Brew {
+        Text {
+            id: lDate
+            text: qsTr("02 January 2017")
+            verticalAlignment: Text.AlignVCenter
+            elide: Text.ElideNone
+            fontSizeMode: Text.HorizontalFit
+            horizontalAlignment: Text.AlignHCenter
+            font.pixelSize: 12
+            width: parent.width
         }
 
-        Page {
-            Label {
-                text: qsTr("Second page")
-                anchors.centerIn: parent
+        Text {
+            id: lTime
+            text: qsTr("Text")
+            horizontalAlignment: Text.AlignHCenter
+            font.pixelSize: 12
+            width: parent.width
+        }
+
+        SwipeView {
+            id: swipeView
+            Layout.fillHeight: true
+            Layout.fillWidth: true
+            currentIndex: tabBar.currentIndex
+
+            Brew {
+            }
+
+            Ferment {
             }
         }
     }
@@ -30,12 +52,12 @@ ApplicationWindow {
         TabButton {
             x: -304
             y: 0
-            text: qsTr("First")
+            text: qsTr("BREW")
         }
         TabButton {
             x: -243
             y: 0
-            text: qsTr("Second")
+            text: qsTr("FERMENT")
         }
     }
 }
