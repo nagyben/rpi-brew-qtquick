@@ -13,9 +13,15 @@ ApplicationWindow {
         id: column
         anchors.fill: parent
 
+        Timer {
+            interval: 1000; running: true; repeat: true
+            onTriggered: lTime.text = new Date().toLocaleTimeString()
+            triggeredOnStart: true
+        }
+
         Text {
             id: lDate
-            text: qsTr("02 January 2017")
+            text: new Date().toLocaleDateString()
             verticalAlignment: Text.AlignVCenter
             elide: Text.ElideNone
             fontSizeMode: Text.HorizontalFit
@@ -26,7 +32,6 @@ ApplicationWindow {
 
         Text {
             id: lTime
-            text: qsTr("Text")
             horizontalAlignment: Text.AlignHCenter
             font.pixelSize: 12
             width: parent.width

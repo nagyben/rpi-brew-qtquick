@@ -1,6 +1,7 @@
 import QtQuick 2.7
 import QtQuick.Controls 2.2
 import QtQuick.Layouts 1.3
+import tempsensor 1.0
 
 Item {
 
@@ -47,42 +48,49 @@ Item {
 
             TextField {
                 id: tRedId
-                text: qsTr("Text Field")
-                Layout.fillHeight: false
-                leftPadding: 10
-                padding: 6
-                topPadding: 6
-                Layout.preferredHeight: 30
-                Layout.minimumHeight: 0
+                text: tsRed.sensorAddress
+                onTextChanged: tsRed.sensorAddress = text
                 Layout.fillWidth: true
                 horizontalAlignment: Text.AlignHCenter
             }
 
             TextField {
                 id: tBlueId
-                text: qsTr("Text Field")
-                Layout.preferredHeight: 30
+                onTextChanged: tsBlue.sensorAddress = text
                 Layout.fillWidth: true
                 horizontalAlignment: Text.AlignHCenter
             }
 
             TextField {
                 id: tGreenId
-                text: qsTr("Text Field")
-                Layout.preferredHeight: 30
+                onTextChanged: tsGreen.sensorAddress = text
                 Layout.fillWidth: true
                 horizontalAlignment: Text.AlignHCenter
+            }
+
+            TempSensor {
+                id: tsRed
+            }
+
+            TempSensor {
+                id: tsBlue
+            }
+
+            TempSensor {
+                id: tsGreen
             }
 
             Button {
                 id: btnPrep
                 text: qsTr("PREP")
+                font.bold: true
                 Layout.fillWidth: true
             }
 
             Button {
                 id: btnMash
                 text: qsTr("MASH")
+                font.bold: true
                 spacing: 0
                 Layout.fillWidth: true
             }
@@ -90,6 +98,7 @@ Item {
             Button {
                 id: btnBoil
                 text: qsTr("BOIL")
+                font.bold: true
                 Layout.fillWidth: true
             }
         }
