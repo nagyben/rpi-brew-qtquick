@@ -1,6 +1,7 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
 #include "temperaturesensor.h"
+#include "datalogger.h"
 
 int main(int argc, char *argv[])
 {
@@ -8,6 +9,7 @@ int main(int argc, char *argv[])
     QGuiApplication app(argc, argv);
 
     qmlRegisterType<TemperatureSensor>("tempsensor", 1, 0, "TempSensor");
+    qmlRegisterType<DataLogger>("datalogger", 1, 0, "DataLogger");
 
     QQmlApplicationEngine engine;
     engine.load(QUrl(QLatin1String("qrc:/main.qml")));

@@ -2,7 +2,7 @@
     <qresource prefix="/">
         <file>main.qml</file>
         <file>qtquickcontrols2.conf</file>
-        <file>Brew.ui.qml</file>
+        <file>Brew.qml</file>
         <file>Ferment.qml</file>
     </qresource>
 </RCC>

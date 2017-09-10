@@ -22,19 +22,22 @@ ApplicationWindow {
         Text {
             id: lDate
             text: new Date().toLocaleDateString()
+            Layout.fillWidth: true
             verticalAlignment: Text.AlignVCenter
             elide: Text.ElideNone
             fontSizeMode: Text.HorizontalFit
             horizontalAlignment: Text.AlignHCenter
-            font.pixelSize: 12
+            font.pixelSize: 26
             width: parent.width
         }
 
         Text {
             id: lTime
+            text: new Date().toLocaleTimeString()
             horizontalAlignment: Text.AlignHCenter
-            font.pixelSize: 12
+            font.pixelSize: 26
             width: parent.width
+            Layout.fillWidth: true
         }
 
         SwipeView {
