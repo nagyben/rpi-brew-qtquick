@@ -7,10 +7,9 @@ DataLogger::DataLogger(QObject *parent) : QObject(parent) {
   _logEnabled = false;
   const QString FILENAME = "/home/ben/Documents/rpi-brew-qtquick/brew-" + QDate::currentDate().toString("yyyy-MM-dd") + ".log";
   _logFile.setFileName(FILENAME);
-  _logFile.open(QIODevice::WriteOnly | QIODevice::Text);
+  _logFile.open(QIODevice::WriteOnly | QIODevice::Append | QIODevice::Text);
 
   qInfo() << "Log file" << FILENAME << "opened";
-
 }
 
 DataLogger::~DataLogger() {
@@ -29,13 +28,13 @@ void DataLogger::setLogEnabled(const bool enabled) {
 }
 
 void DataLogger::log(const QList<QString> logData) {
-  //    QLoggingCategory qlc("DataLogger::log()");
+  QLoggingCategory qlc("DataLogger::log()");
 
   if (_logEnabled && logData.length() > 0) {
     QStringList qsl(logData);
     QTextStream out(&_logFile);
-    QString msg = QDateTime::currentDateTime().toString("dd-MM-yyyy") + "," + qsl.join(",") + "\n";
-    qInfo() << msg;
+    QString msg = QDateTime::currentDateTime().toString("dd-MM-yyyyThh:mm:ss") + "," + qsl.join(",") + "\n";
+    qInfo(qlc) << msg;
     out << msg;
   }
 }

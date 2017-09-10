@@ -16,7 +16,7 @@ void TemperatureSensor::setSensorAddress(const QString &sensorAddress) {
   if (_sensorAddress == sensorAddress)
     return;
 
-  qInfo() << "Setting sensor address to" << _sensorAddress;
+  qInfo() << "Setting sensor address to" << sensorAddress;
   _sensorAddress = sensorAddress;
   emit sensorAddressChanged();
 }
@@ -34,35 +34,37 @@ float TemperatureSensor::getTemp() {
   const QString filepath = "/sys/bus/w1/devices/28-00000" + _sensorAddress + "/w1_slave";
   QFile file(filepath);
 
-  if (file.open(QIODevice::ReadOnly | QIODevice::Text)) {
-    QTextStream infile(&file);
+  if (file.exists()) {
+    if (file.open(QIODevice::ReadOnly | QIODevice::Text)) {
+      QTextStream infile(&file);
 
-    while(!infile.atEnd()) {
-      QString line = infile.readLine();
+      while(!infile.atEnd()) {
+        QString line = infile.readLine();
 
-      if (line.contains("YES")) {
-        line = infile.readLine();
+        if (line.contains("YES")) {
+          line = infile.readLine();
 
-        int tPos = line.lastIndexOf("=");
-        if (tPos != -1) {
-          return line.right(line.length() - tPos).toFloat();
+          int tPos = line.lastIndexOf("=");
+          if (tPos != -1) {
+            return line.right(line.length() - tPos).toFloat();
 
-        } else {
-          qWarning(qlc) << "Could not find equals sign in file " << filepath;
-          return -1;
+          } else {
+            qWarning(qlc) << "Could not find equals sign in file " << filepath;
 
-        } // if (tPos != -1)
-      } // if (line.contains("YES"))
-      qWarning(qlc) << line;
+          } // if (tPos != -1)
+        } // if (line.contains("YES"))
+        qWarning(qlc) << line;
 
-    } // while(!infile.atEnd())
+      } // while(!infile.atEnd())
 
-    // reached end of file without finding "YES" so return -1
-    return -1;
+    } else {
+      qWarning(qlc) << "Could not open file " << filepath;
+    } // if (file.open(QIODevice::ReadOnly || QIODevice::Text))
 
   } else {
-    qWarning(qlc) << "Could not open file " << filepath;
-    return -1;
+    qInfo(qlc) << "File" << filepath << "does not exist";
+  } // if (file.exists())
 
-  } // if (file.open(QIODevice::ReadOnly || QIODevice::Text))
+  // if we have reached here, then all the checks have failed and we return -1
+  return -1;
 }

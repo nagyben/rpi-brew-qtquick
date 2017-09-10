@@ -5,7 +5,7 @@ import QtQuick.Layouts 1.3
 ApplicationWindow {
     id: applicationWindow
     visible: true
-    width: 640
+    width: 800
     height: 480
     title: qsTr("Hello World")
 

@@ -1,5 +1,7 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
+#include <QSettings>
+
 #include "temperaturesensor.h"
 #include "datalogger.h"
 
@@ -15,6 +17,8 @@ int main(int argc, char *argv[])
     engine.load(QUrl(QLatin1String("qrc:/main.qml")));
     if (engine.rootObjects().isEmpty())
         return -1;
+
+//    QPushButton *button = engine->findChild<QPushButton *>("button1");
 
     return app.exec();
 }
