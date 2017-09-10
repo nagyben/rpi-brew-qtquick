@@ -16,6 +16,7 @@ void TemperatureSensor::setSensorAddress(const QString &sensorAddress) {
   if (_sensorAddress == sensorAddress)
     return;
 
+  qInfo() << "Setting sensor address to" << _sensorAddress;
   _sensorAddress = sensorAddress;
   emit sensorAddressChanged();
 }
