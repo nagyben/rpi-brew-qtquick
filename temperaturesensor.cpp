@@ -62,7 +62,7 @@ float TemperatureSensor::getTemp() {
     } // if (file.open(QIODevice::ReadOnly || QIODevice::Text))
 
   } else {
-    qInfo(qlc) << "File" << filepath << "does not exist";
+//    qInfo(qlc) << "File" << filepath << "does not exist";
   } // if (file.exists())
 
   // if we have reached here, then all the checks have failed and we return -1
